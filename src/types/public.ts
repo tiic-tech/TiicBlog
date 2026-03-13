@@ -53,3 +53,59 @@ export interface PublicArticlesResponse {
 }
 
 export type SortOption = 'recent' | 'trending' | 'stars'
+
+// Article Detail Types
+export interface ArticleDetail {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  content: string | null
+  cover_image: string | null
+  vibe_platform: string | null
+  vibe_duration_minutes: number | null
+  vibe_model: string | null
+  vibe_prompt: string | null
+  vibe_ai_response: string | null
+  is_premium: boolean
+  price: number | null
+  stars_count: number
+  views_count: number
+  published_at: string
+  profiles: {
+    id: string
+    username: string
+    display_name: string | null
+    avatar_url: string | null
+    bio: string | null
+  }
+  projects: {
+    id: string
+    name: string
+    color: string | null
+    description: string | null
+  } | null
+}
+
+export interface StarState {
+  isStarred: boolean
+  starsCount: number
+}
+
+export interface RelatedArticle {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  cover_image: string | null
+  vibe_platform: string | null
+  vibe_duration_minutes: number | null
+  stars_count: number
+  views_count: number
+  published_at: string
+  profiles: {
+    username: string
+    display_name: string | null
+    avatar_url: string | null
+  }
+}

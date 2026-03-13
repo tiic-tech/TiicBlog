@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import { PenTool, Menu, X } from 'lucide-react'
+import { Toaster } from 'sonner'
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -73,6 +74,9 @@ export default async function PublicLayout({ children }: { children: React.React
 
       {/* Main Content */}
       <main className="flex-1">{children}</main>
+
+      {/* Toast Notifications */}
+      <Toaster position="bottom-right" />
 
       {/* Footer */}
       <footer className="bg-muted/30 border-t py-8">

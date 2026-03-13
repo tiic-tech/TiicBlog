@@ -70,6 +70,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Feed filters (platform, sorting)
   - Pagination with load more
   - Public articles API with filtering and sorting
+- Article detail page implemented (Step 3.2)
+  - Article detail API route with slug lookup
+  - Article content renderer for Tiptap JSON/HTML
+  - Article header with metadata and author info
+  - Star functionality with toggle API
+  - Share functionality with native share/clipboard
+  - Related articles from same author
+  - SEO metadata with OpenGraph and Twitter cards
+  - Views count increment on page visit
 
 ### Changed
 - Updated API routes for Next.js 16 compatibility (params is now Promise)
@@ -115,7 +124,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | Step | Task | Status |
 |------|------|--------|
 | 3.1 | Build Public Feed | Completed |
-| 3.2 | Build Article Detail Page | Not Started |
+| 3.2 | Build Article Detail Page | Completed |
 | 3.3 | Build User Profile Pages | Not Started |
 
 ### Phase 4: Polish & Deploy
