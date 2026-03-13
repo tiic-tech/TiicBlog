@@ -64,6 +64,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Projects and articles grouped by date
   - Expandable project buckets with nested articles
   - Quick actions (edit, delete) on hover
+- Public feed implemented (Step 3.1)
+  - Public layout with header and footer
+  - Article card component with 3-section layout
+  - Feed filters (platform, sorting)
+  - Pagination with load more
+  - Public articles API with filtering and sorting
 
 ### Changed
 - Updated API routes for Next.js 16 compatibility (params is now Promise)
@@ -108,7 +114,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Phase 3: Public Features
 | Step | Task | Status |
 |------|------|--------|
-| 3.1 | Build Public Feed | Not Started |
+| 3.1 | Build Public Feed | Completed |
 | 3.2 | Build Article Detail Page | Not Started |
 | 3.3 | Build User Profile Pages | Not Started |
 
