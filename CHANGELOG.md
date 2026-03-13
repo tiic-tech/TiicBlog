@@ -50,7 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | Step | Task | Status |
 |------|------|--------|
 | 1.1 | Initialize Project | Completed |
-| 1.2 | Configure Supabase Client | Not Started |
+| 1.2 | Configure Supabase Client | Completed |
 | 1.3 | Set Up Database Schema | Not Started |
 | 1.4 | Build Authentication | Not Started |
 | 1.5 | Build Onboarding Flow | Not Started |
