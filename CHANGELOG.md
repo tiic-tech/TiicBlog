@@ -79,6 +79,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Related articles from same author
   - SEO metadata with OpenGraph and Twitter cards
   - Views count increment on page visit
+- User profile pages implemented (Step 3.3)
+  - User profile API route with stats
+  - Profile header with avatar, bio, social links
+  - Profile articles list with pagination
+  - SEO metadata for profiles
 
 ### Changed
 - Updated API routes for Next.js 16 compatibility (params is now Promise)
@@ -125,7 +130,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 |------|------|--------|
 | 3.1 | Build Public Feed | Completed |
 | 3.2 | Build Article Detail Page | Completed |
-| 3.3 | Build User Profile Pages | Not Started |
+| 3.3 | Build User Profile Pages | Completed |
 
 ### Phase 4: Polish & Deploy
 | Step | Task | Status |

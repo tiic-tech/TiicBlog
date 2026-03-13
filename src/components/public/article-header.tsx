@@ -9,7 +9,16 @@ interface ArticleHeaderProps {
 }
 
 export default function ArticleHeader({ article }: ArticleHeaderProps) {
-  const { profiles, projects, published_at, vibe_platform, vibe_duration_minutes, vibe_model, views_count, stars_count } = article
+  const {
+    profiles,
+    projects,
+    published_at,
+    vibe_platform,
+    vibe_duration_minutes,
+    vibe_model,
+    views_count,
+    stars_count,
+  } = article
 
   const authorName = profiles.display_name || profiles.username
   const authorInitials = authorName
@@ -38,15 +47,11 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
   return (
     <header className="space-y-6">
       {/* Title */}
-      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-        {article.title}
-      </h1>
+      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{article.title}</h1>
 
       {/* Excerpt */}
       {article.excerpt && (
-        <p className="text-muted-foreground text-lg leading-relaxed">
-          {article.excerpt}
-        </p>
+        <p className="text-lg leading-relaxed text-muted-foreground">{article.excerpt}</p>
       )}
 
       {/* Meta badges */}
@@ -72,10 +77,10 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
       </div>
 
       {/* Author and stats row */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-b py-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-t py-4">
         {/* Author */}
         <Link
-          href={`/@${profiles.username}`}
+          href={`/u/${profiles.username}`}
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
         >
           <Avatar className="h-10 w-10">
@@ -84,12 +89,12 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
           </Avatar>
           <div>
             <div className="font-medium">{authorName}</div>
-            <div className="text-muted-foreground text-sm">@{profiles.username}</div>
+            <div className="text-sm text-muted-foreground">@{profiles.username}</div>
           </div>
         </Link>
 
         {/* Stats and date */}
-        <div className="text-muted-foreground flex items-center gap-4 text-sm">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
           {formattedDate && (
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
@@ -110,7 +115,7 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
       {/* Project badge */}
       {projects && (
         <div className="flex items-center gap-2">
-          <Folder className="text-muted-foreground h-4 w-4" />
+          <Folder className="h-4 w-4 text-muted-foreground" />
           <Link
             href={`/dashboard/projects/${projects.id}`}
             className="text-sm font-medium transition-colors hover:text-primary"

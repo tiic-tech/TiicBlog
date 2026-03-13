@@ -109,3 +109,10 @@ export interface RelatedArticle {
     avatar_url: string | null
   }
 }
+
+// Profile Types
+export interface ProfileWithArticles {
+  profile: PublicProfile
+  articles: PublicArticle[]
+  pagination: PaginationInfo
+}
