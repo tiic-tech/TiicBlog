@@ -205,6 +205,127 @@ docker compose -f docker-compose.prod.yml up --build
 
 ---
 
+## Step Completion Workflow
+
+**After completing each Step:**
+
+1. **Update CHANGELOG.md**
+   - Update the progress table
+   - Add new features to "Added" section
+   - Commit with message: `docs: update CHANGELOG for Step X.Y`
+
+2. **Create PR**
+   - Push branch to remote
+   - Create PR with summary
+
+3. **Merge to main** (when approved)
+   - Merge PR
+   - Push to main
+
+---
+
+## Model Context Window Limits
+
+**CRITICAL: Prevent context overflow by monitoring token usage.**
+
+### Context Window Specifications (from official docs)
+
+| Model | Max Context (tokens) | Available (50%) | Warning (90% of Available) |
+|-------|---------------------|-----------------|---------------------------|
+| **glm-5** | 131,072 (128K) | 65,536 (64K) | 58,982 (~59K) |
+| **glm-4.7** | 131,072 (128K) | 65,536 (64K) | 58,982 (~59K) |
+| **glm-4.6** | 131,072 (128K) | 65,536 (64K) | 58,982 (~59K) |
+| **glm-4.5** | 98,304 (96K) | 49,152 (48K) | 44,237 (~44K) |
+| **MiniMax-M2.5** | 200,000 (200K) | 100,000 (100K) | 90,000 (90K) |
+| **qwen3.5-plus** | 131,072 (128K) | 65,536 (64K) | 58,982 (~59K) |
+
+**Sources:**
+- GLM: https://docs.z.ai/guides/overview/concept-param
+- MiniMax: https://platform.minimax.io/docs/coding-plan/best-practices
+- Qwen: https://qwenlm.github.io/blog/qwen2.5-turbo/
+
+### Context Management Rules
+
+**Available Context = 50% of Max Context Window**
+
+Why 50%? Because:
+1. System prompts consume ~10-15K tokens
+2. Extended thinking reserves up to 32K tokens
+3. Output generation needs headroom
+4. Safety margin prevents abrupt truncation
+
+### Step-Level Context Check Protocol
+
+**After completing EACH Step (not Phase):**
+
+1. **Check current token usage** via `~/.claude.json`:
+   - Look for `lastTotalInputTokens` and `lastTotalOutputTokens`
+   - Calculate: `current_usage = inputTokens + outputTokens`
+
+2. **Compare against thresholds:**
+   - If `current_usage >= Warning Threshold` (90% of Available):
+     - STOP and execute Context Overflow Protocol
+
+3. **Context Overflow Protocol:**
+   a. Update CHANGELOG.md immediately:
+      - Mark current step status
+      - List completed files
+      - Note any pending work
+      - Add session notes for next session
+   b. Commit all changes with message: `docs: context overflow - update CHANGELOG`
+   c. **Auto-compact:** Execute `/strategic-compact` to compress context
+   d. **Repeat compact** if still approaching threshold after first compression
+   e. **Notify user for /clear** only when:
+      - Multiple compacts failed to reduce context below threshold
+      - AND CHANGELOG.md + git status provide complete recovery information:
+        - All completed steps documented
+        - All pending work clearly listed
+        - File changes committed or staged
+        - Next step clearly identified
+
+### Token Usage Detection Method
+
+Check `~/.claude.json` at project path:
+```json
+{
+  "projects": {
+    "/Volumes/Workspace/StartUp/TiicBlog": {
+      "lastTotalInputTokens": XXXXX,
+      "lastTotalOutputTokens": XXXXX,
+      "lastModelUsage": {
+        "glm-5[1m]": {
+          "inputTokens": XXXXX,
+          "outputTokens": XXXXX
+        }
+      }
+    }
+  }
+}
+```
+
+**Calculation:** `total_tokens = lastTotalInputTokens + lastTotalOutputTokens`
+
+---
+
+## Context Compaction Strategy
+
+**Compact at Phase boundaries, NOT Step boundaries:**
+
+| Timing | Action | Reason |
+|--------|--------|--------|
+| After Step | Check tokens, update CHANGELOG if near limit | Preserve context for related steps |
+| After Phase | Strategic compact | Phases are independent units |
+
+**Why compact after Phase completion:**
+- Steps within a Phase are tightly coupled
+- Compacting mid-Phase loses shared context
+- Phase boundaries are natural stopping points
+- CHANGELOG.md preserves all progress details
+
+**Compact trigger:** When a Phase is marked complete in CHANGELOG.md OR when approaching context limit
+
+---
+
 ## Session Checklist
 
 **At the start of each session:**
@@ -215,9 +336,32 @@ docker compose -f docker-compose.prod.yml up --build
 **During development:**
 - [ ] Use appropriate agents/skills proactively
 - [ ] Update `CHANGELOG.md` after milestones
-- [ ] Manage context length
+- [ ] Monitor context length (check tokens after each Step)
+
+**After completing each Step:**
+- [ ] Check token usage in `~/.claude.json`
+- [ ] If approaching 90% of Available Context:
+  - [ ] Update CHANGELOG.md with current progress
+  - [ ] Commit changes: `docs: context overflow - update CHANGELOG`
+  - [ ] Execute `/strategic-compact` to compress context
+  - [ ] Repeat compact if still above threshold
+  - [ ] Only notify user for `/clear` when:
+    - Multiple compacts failed, AND
+    - CHANGELOG.md + git status enable full recovery
 
 **At the end of each session:**
 - [ ] Update `CHANGELOG.md` with progress
 - [ ] Commit changes with conventional commits
 - [ ] Note any blockers for next session
+
+---
+
+## Quick Reference: Token Thresholds
+
+| Model | Stop & Update CHANGELOG at |
+|-------|---------------------------|
+| glm-5 | ~59,000 tokens |
+| MiniMax-M2.5 | ~90,000 tokens |
+| qwen3.5-plus | ~59,000 tokens |
+
+**Current session model:** Check your model and use the corresponding threshold.
