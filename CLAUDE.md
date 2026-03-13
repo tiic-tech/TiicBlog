@@ -11,7 +11,7 @@
 
 ## Documentation
 
-This project uses 7 core documents:
+This project uses 8 core documents:
 - `PRD.md` - Product Requirements Document
 - `APP_FLOW.md` - Application Flow Document
 - `TECH_STACK.md` - Technology Stack Document
@@ -19,8 +19,13 @@ This project uses 7 core documents:
 - `BACKEND_STRUCTURE.md` - Backend Structure Document
 - `IMPLEMENTATION_PLAN.md` - Implementation Plan
 - `CHANGELOG.md` - Progress Tracking
+- `DEVELOPLOG.md` - Development Milestones & Lessons Learned
 
-**IMPORTANT:** Read `CHANGELOG.md` at the start of each session to understand current progress.
+**Session Startup Checklist:**
+- [ ] Read `CHANGELOG.md` for current progress
+- [ ] Read `DEVELOPLOG.md` for context and lessons learned
+- [ ] Check `IMPLEMENTATION_PLAN.md` for next steps
+- [ ] Verify environment variables are set
 
 ## Critical Rules
 
@@ -330,6 +335,7 @@ Check `~/.claude.json` at project path:
 
 **At the start of each session:**
 - [ ] Read `CHANGELOG.md` for current progress
+- [ ] Read `DEVELOPLOG.md` for context and lessons learned
 - [ ] Check `IMPLEMENTATION_PLAN.md` for next steps
 - [ ] Verify environment variables are set
 
@@ -337,6 +343,7 @@ Check `~/.claude.json` at project path:
 - [ ] Use appropriate agents/skills proactively
 - [ ] Update `CHANGELOG.md` after milestones
 - [ ] Monitor context length (check tokens after each Step)
+- [ ] Reference `DEVELOPLOG.md` "Bad Cases" to avoid repeat mistakes
 
 **After completing each Step:**
 - [ ] Check token usage in `~/.claude.json`
@@ -345,12 +352,10 @@ Check `~/.claude.json` at project path:
   - [ ] Commit changes: `docs: context overflow - update CHANGELOG`
   - [ ] Execute `/strategic-compact` to compress context
   - [ ] Repeat compact if still above threshold
-  - [ ] Only notify user for `/clear` when:
-    - Multiple compacts failed, AND
-    - CHANGELOG.md + git status enable full recovery
 
 **At the end of each session:**
 - [ ] Update `CHANGELOG.md` with progress
+- [ ] Update `DEVELOPLOG.md` if significant lessons learned
 - [ ] Commit changes with conventional commits
 - [ ] Note any blockers for next session
 
