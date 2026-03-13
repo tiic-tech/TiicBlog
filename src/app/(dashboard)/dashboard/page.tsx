@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { DashboardStats } from '@/components/dashboard/dashboard-stats'
-import { RecentArticles } from '@/components/dashboard/recent-articles'
+import { Timeline } from '@/components/dashboard/timeline'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -20,13 +20,19 @@ export default async function DashboardPage() {
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user!.id)
 
-  // Fetch recent articles
-  const { data: recentArticles } = await supabase
-    .from('articles')
-    .select('id, title, slug, status, created_at, projects(name)')
+  // Fetch projects for timeline
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('id, name, color, description, created_at')
     .eq('user_id', user!.id)
     .order('created_at', { ascending: false })
-    .limit(5)
+
+  // Fetch articles for timeline
+  const { data: articles } = await supabase
+    .from('articles')
+    .select('id, title, status, created_at, project_id')
+    .eq('user_id', user!.id)
+    .order('created_at', { ascending: false })
 
   return (
     <div className="space-y-8">
@@ -35,12 +41,12 @@ export default async function DashboardPage() {
         <p className="text-muted-foreground">Welcome back! Here is your vibe coding journey.</p>
       </div>
 
-      <DashboardStats
-        projectsCount={projectsCount || 0}
-        articlesCount={articlesCount || 0}
-      />
+      <DashboardStats projectsCount={projectsCount || 0} articlesCount={articlesCount || 0} />
 
-      <RecentArticles articles={recentArticles || []} />
+      <div>
+        <h2 className="mb-4 text-xl font-semibold">Timeline</h2>
+        <Timeline projects={projects || []} articles={articles || []} />
+      </div>
     </div>
   )
 }

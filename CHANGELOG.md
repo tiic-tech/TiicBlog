@@ -60,6 +60,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Auto-save every 30 seconds
   - Publish modal with visibility and pricing options
   - Article API routes (GET, POST, PUT, DELETE, PUBLISH)
+- Timeline view implemented
+  - Projects and articles grouped by date
+  - Expandable project buckets with nested articles
+  - Quick actions (edit, delete) on hover
 
 ### Changed
 - Updated API routes for Next.js 16 compatibility (params is now Promise)
@@ -99,7 +103,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | 2.1 | Build Dashboard Layout | Completed |
 | 2.2 | Build Project Management | Completed |
 | 2.3 | Build Article Management | Completed |
-| 2.4 | Build Timeline View | Not Started |
+| 2.4 | Build Timeline View | Completed |
 
 ### Phase 3: Public Features
 | Step | Task | Status |
