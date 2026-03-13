@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Context management rules
   - Development isolation modes (sandbox, worktree)
   - Environment setup instructions
+  - Context overflow prevention mechanism
 - Database schema created via Supabase migrations
   - profiles table with RLS
   - projects table with RLS
@@ -46,9 +47,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - User menu with dropdown
   - Dashboard stats component
   - Recent articles component
+- Project management implemented
+  - Projects list page with cards
+  - Create project form
+  - Edit project form
+  - Delete with confirmation dialog
+  - Project API routes (GET, POST, PUT, DELETE)
 
 ### Changed
-- Nothing yet
+- Updated API routes for Next.js 16 compatibility (params is now Promise)
 
 ### Deprecated
 - Nothing yet
@@ -83,7 +90,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 | Step | Task | Status |
 |------|------|--------|
 | 2.1 | Build Dashboard Layout | Completed |
-| 2.2 | Build Project Management | Not Started |
+| 2.2 | Build Project Management | Completed |
 | 2.3 | Build Article Management | Not Started |
 | 2.4 | Build Timeline View | Not Started |
 
