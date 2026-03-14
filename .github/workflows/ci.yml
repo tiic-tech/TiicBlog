@@ -22,11 +22,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup pnpm with caching
+      # Step 2: Setup pnpm (version from package.json packageManager)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       # Step 3: Setup Node.js with pnpm cache
       - name: Setup Node.js
