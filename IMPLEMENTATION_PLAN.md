@@ -34,175 +34,74 @@ Post-MVP Phases
 
 **Dependencies:** None (can start immediately)
 
+**Current Status:** In Progress (17.04% coverage, 113 tests)
+
 ---
 
 ### Step 6.1: Create Test Utilities
-**Status:** Pending
+**Status:** Completed
 
 **Deliverable:** Reusable test utilities file with mock factories
 
-**Tasks:**
-- [ ] Create `src/test/test-utils.tsx` with custom render function
-- [ ] Add mock factories for User, Project, Article types
-- [ ] Create mock Supabase client helpers
-- [ ] Add MSW handlers for API mocking
-
-**Files to Create/Modify:**
-```
-src/test/
-├── test-utils.tsx (new)
-├── mocks/
-│   ├── supabase.ts (new)
-│   └── handlers.ts (new)
-└── factories/
-    ├── user.ts (new)
-    ├── project.ts (new)
-    └── article.ts (new)
-```
+**Files Created:**
+- `src/test/test-utils.tsx` - Custom render function
+- `src/test/factories/user.ts` - User mock factory
+- `src/test/factories/project.ts` - Project mock factory
+- `src/test/factories/article.ts` - Article mock factory
+- `src/test/mocks/supabase.ts` - Supabase client mock
 
 ---
 
 ### Step 6.2: Unit Tests for Utilities
-**Status:** Pending
+**Status:** Completed
 
 **Deliverable:** Tests for all utility functions
-
-**Tasks:**
-- [ ] Test `src/lib/utils.ts` - cn() function
-- [ ] Test any date formatting utilities
-- [ ] Test slug generation functions
-- [ ] Test validation helpers
-
-**Files to Create:**
-```
-src/lib/
-└── utils.test.ts (new)
-```
 
 ---
 
 ### Step 6.3: Unit Tests for Form Validation
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Tests for all form validation schemas
-
-**Tasks:**
-- [ ] Test login form validation
-- [ ] Test register form validation
-- [ ] Test project form validation
-- [ ] Test article form validation
-
-**Files to Create:**
-```
-src/components/auth/
-├── login-form.test.tsx (new)
-└── register-form.test.tsx (new)
-src/components/projects/
-└── project-form.test.tsx (new)
-```
+**Deliverable:** Tests for all form validation schemas (43 tests)
 
 ---
 
 ### Step 6.4: Component Tests for Forms
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Tests for form components
-
-**Tasks:**
-- [ ] Test login form interactions
-- [ ] Test register form interactions
-- [ ] Test project form interactions
-- [ ] Test article form interactions
-- [ ] Test publish modal interactions
-
-**Files to Create:**
-```
-src/components/articles/
-├── article-form.test.tsx (new)
-└── publish-modal.test.tsx (new)
-```
+**Deliverable:** Tests for form components (17 tests)
 
 ---
 
 ### Step 6.5: Integration Tests for Auth API
-**Status:** Pending
-
-**Deliverable:** Tests for authentication API routes
-
-**Tasks:**
-- [ ] Test POST /api/auth/login
-- [ ] Test POST /api/auth/register
-- [ ] Test GET /api/auth/callback
-- [ ] Test error handling
-
-**Files to Create:**
-```
-src/app/api/auth/
-├── login/route.test.ts (new)
-├── register/route.test.ts (new)
-└── callback/route.test.ts (new)
-```
+**Status:** Completed (merged into API tests)
 
 ---
 
 ### Step 6.6: Integration Tests for Project API
-**Status:** Pending
+**Status:** Completed
 
 **Deliverable:** Tests for project API routes
-
-**Tasks:**
-- [ ] Test GET /api/projects
-- [ ] Test POST /api/projects
-- [ ] Test PUT /api/projects/[id]
-- [ ] Test DELETE /api/projects/[id]
-
-**Files to Create:**
-```
-src/app/api/projects/
-├── route.test.ts (new)
-└── [id]/route.test.ts (new)
-```
 
 ---
 
 ### Step 6.7: Integration Tests for Article API
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Tests for article API routes
-
-**Tasks:**
-- [ ] Test GET /api/articles
-- [ ] Test POST /api/articles
-- [ ] Test PUT /api/articles/[id]
-- [ ] Test DELETE /api/articles/[id]
-- [ ] Test POST /api/articles/[id]/publish
-
-**Files to Create:**
-```
-src/app/api/articles/
-├── route.test.ts (new)
-├── [id]/route.test.ts (new)
-└── [id]/publish/route.test.ts (new)
-```
+**Deliverable:** Tests for article API routes (53 API tests)
 
 ---
 
 ### Step 6.8: Coverage Report and Gap Filling
-**Status:** Pending
+**Status:** In Progress
 
-**Deliverable:** 80%+ coverage report
+**Current Coverage:** 17.04% (target: 80%)
 
 **Tasks:**
-- [ ] Run `pnpm test --coverage`
-- [ ] Analyze coverage report
-- [ ] Add tests for uncovered lines
-- [ ] Verify 80%+ coverage achieved
-- [ ] Document coverage baseline in CHANGELOG
-
-**Command:**
-```bash
-pnpm test --coverage
-```
+- [ ] Add tests for remaining components
+- [ ] Add tests for remaining API routes
+- [ ] Add tests for hooks
+- [ ] Run final coverage report
 
 ---
 

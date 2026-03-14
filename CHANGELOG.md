@@ -9,6 +9,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Test infrastructure for Phase 6
+  - Test utilities with custom render function
+  - Mock factories for User, Project, Article types
+  - Mock Supabase client helpers
+- Comprehensive test suite (113 tests)
+  - Validation tests for all form schemas
+  - Component tests for LoginForm, RegisterForm, ProjectForm, PublishModal
+  - API tests for Projects, Articles, and Article Publish endpoints
 - Custom domain configuration: `viblog.tiic.tech`
   - Added `NEXT_PUBLIC_SITE_URL` environment variable
   - Updated `.env.local` and `.env.local.example`
