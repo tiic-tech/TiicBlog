@@ -95,12 +95,16 @@ Post-MVP Phases
 ### Step 6.8: Coverage Report and Gap Filling
 **Status:** In Progress
 
-**Current Coverage:** 17.04% (target: 80%)
+**Current Coverage:** 20.15% (target: 80%)
 
-**Tasks:**
+**Progress:**
+- 142 tests passing
+- Coverage improved from 4.24% → 20.15%
+
+**Remaining Work:**
+- [ ] Add tests for `src/app/(public)` pages
+- [ ] Add tests for middleware
 - [ ] Add tests for remaining components
-- [ ] Add tests for remaining API routes
-- [ ] Add tests for hooks
 - [ ] Run final coverage report
 
 ---

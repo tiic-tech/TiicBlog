@@ -13,9 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Test utilities with custom render function
   - Mock factories for User, Project, Article types
   - Mock Supabase client helpers
-- Comprehensive test suite (113 tests)
+- Comprehensive test suite (142 tests, 20.15% coverage)
   - Validation tests for all form schemas
   - Component tests for LoginForm, RegisterForm, ProjectForm, PublishModal
+  - UI component tests for Button, Input, Label, Card
+  - Hook tests for useToast
   - API tests for Projects, Articles, and Article Publish endpoints
 - Custom domain configuration: `viblog.tiic.tech`
   - Added `NEXT_PUBLIC_SITE_URL` environment variable
