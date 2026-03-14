@@ -12,20 +12,47 @@
 ## Documentation
 
 This project uses 8 core documents:
+
+**Planning Documents:**
 - `PRD.md` - Product Requirements Document
 - `APP_FLOW.md` - Application Flow Document
 - `TECH_STACK.md` - Technology Stack Document
 - `FRONTEND_GUIDELINES.md` - Frontend Design Guidelines
 - `BACKEND_STRUCTURE.md` - Backend Structure Document
-- `IMPLEMENTATION_PLAN.md` - Implementation Plan
-- `CHANGELOG.md` - Progress Tracking
-- `DEVELOPLOG.md` - Development Milestones & Lessons Learned
 
-**Session Startup Checklist:**
-- [ ] Read `CHANGELOG.md` for current progress
-- [ ] Read `DEVELOPLOG.md` for context and lessons learned
-- [ ] Check `IMPLEMENTATION_PLAN.md` for next steps
-- [ ] Verify environment variables are set
+**Execution Documents (Updated during development):**
+- `IMPLEMENTATION_PLAN.md` - Step-by-step task breakdown with technical details
+- `CHANGELOG.md` - Change records (Added/Changed/Fixed/Deprecated)
+- `DEVELOPLOG.md` - Milestones, lessons learned, and bad cases
+
+### Document Responsibilities
+
+| Document | Purpose | Update Timing | Content |
+|----------|---------|---------------|---------|
+| **IMPLEMENTATION_PLAN.md** | Implementation plan | When designing plans | Phase→Step tasks, technical details, dependencies, current status |
+| **CHANGELOG.md** | Change log | After each Step completion | Added/Changed/Fixed/Deprecated (Keep a Changelog format) |
+| **DEVELOPLOG.md** | Development log | After each Phase completion | What I Did/What Went Well/What Could Be Better/Bad Cases |
+
+### Session Startup Checklist
+
+**Reading Order:**
+1. [ ] Read `DEVELOPLOG.md` - Understand project history, lessons learned, bad cases
+2. [ ] Read `CHANGELOG.md` - Check latest changes and current version state
+3. [ ] Read `IMPLEMENTATION_PLAN.md` - Identify next tasks and technical approach
+4. [ ] Verify environment variables are set
+
+### Update Priority
+
+**When designing a plan:** Update `IMPLEMENTATION_PLAN.md` first
+
+**When completing a Step:** Update `CHANGELOG.md`
+
+**When completing a Phase:** Update `DEVELOPLOG.md`
+
+**CRITICAL: Document Boundaries**
+- NEVER mix Progress Tracking in CHANGELOG.md (belongs in IMPLEMENTATION_PLAN.md)
+- NEVER mix Urgent Tasks in DEVELOPLOG.md (belongs in IMPLEMENTATION_PLAN.md)
+- NEVER mix Session Logs in CHANGELOG.md (belongs in DEVELOPLOG.md)
 
 ## Critical Rules
 
@@ -210,22 +237,35 @@ docker compose -f docker-compose.prod.yml up --build
 
 ---
 
-## Step Completion Workflow
+## Step & Phase Completion Workflow
 
-**After completing each Step:**
+### After Completing Each Step:
 
 1. **Update CHANGELOG.md**
-   - Update the progress table
-   - Add new features to "Added" section
+   - Add entry to appropriate section (Added/Changed/Fixed)
+   - Describe the change briefly
    - Commit with message: `docs: update CHANGELOG for Step X.Y`
 
-2. **Create PR**
+2. **Update IMPLEMENTATION_PLAN.md**
+   - Mark Step status as "Completed"
+   - Update any relevant notes
+
+### After Completing Each Phase:
+
+1. **Update DEVELOPLOG.md**
+   - Add "What I Did" section
+   - Add "What Went Well" section
+   - Add "What Could Be Better" section
+   - Document any new Bad Cases if mistakes occurred
+
+2. **Update IMPLEMENTATION_PLAN.md**
+   - Mark Phase as "Completed"
+   - Update current phase indicator
+
+3. **Create PR and Merge**
    - Push branch to remote
    - Create PR with summary
-
-3. **Merge to main** (when approved)
-   - Merge PR
-   - Push to main
+   - Merge to main when approved
 
 ---
 
@@ -333,31 +373,35 @@ Check `~/.claude.json` at project path:
 
 ## Session Checklist
 
-**At the start of each session:**
-- [ ] Read `CHANGELOG.md` for current progress
-- [ ] Read `DEVELOPLOG.md` for context and lessons learned
-- [ ] Check `IMPLEMENTATION_PLAN.md` for next steps
+### At the start of each session:
+- [ ] Read `DEVELOPLOG.md` for history, lessons learned, bad cases
+- [ ] Read `CHANGELOG.md` for latest changes
+- [ ] Read `IMPLEMENTATION_PLAN.md` for next steps
 - [ ] Verify environment variables are set
 
-**During development:**
+### During development:
 - [ ] Use appropriate agents/skills proactively
-- [ ] Update `CHANGELOG.md` after milestones
-- [ ] Monitor context length (check tokens after each Step)
 - [ ] Reference `DEVELOPLOG.md` "Bad Cases" to avoid repeat mistakes
+- [ ] Monitor context length (check tokens after each Step)
 
-**After completing each Step:**
+### After completing each Step:
+- [ ] Update `CHANGELOG.md` with changes
+- [ ] Update `IMPLEMENTATION_PLAN.md` step status
 - [ ] Check token usage in `~/.claude.json`
 - [ ] If approaching 90% of Available Context:
-  - [ ] Update CHANGELOG.md with current progress
-  - [ ] Commit changes: `docs: context overflow - update CHANGELOG`
+  - [ ] Commit changes: `docs: step X.Y complete`
   - [ ] Execute `/strategic-compact` to compress context
-  - [ ] Repeat compact if still above threshold
 
-**At the end of each session:**
-- [ ] Update `CHANGELOG.md` with progress
-- [ ] Update `DEVELOPLOG.md` if significant lessons learned
+### After completing each Phase:
+- [ ] Update `DEVELOPLOG.md` with lessons learned
+- [ ] Update `IMPLEMENTATION_PLAN.md` phase status
 - [ ] Commit changes with conventional commits
 - [ ] Note any blockers for next session
+
+### At the end of each session:
+- [ ] Ensure all completed steps are documented
+- [ ] Ensure `IMPLEMENTATION_PLAN.md` reflects current state
+- [ ] Commit all pending changes
 
 ---
 

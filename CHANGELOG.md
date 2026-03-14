@@ -13,6 +13,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Added `NEXT_PUBLIC_SITE_URL` environment variable
   - Updated `.env.local` and `.env.local.example`
   - Fixed build error by converting vitest.config.ts to JS
+
+---
+
+## [0.1.0] - 2026-03-13
+
+### Added
 - Project documentation suite created:
   - PRD.md - Product Requirements Document
   - APP_FLOW.md - Application Flow Document
@@ -22,11 +28,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - IMPLEMENTATION_PLAN.md - Implementation Plan
   - CHANGELOG.md - This changelog
 - Updated CLAUDE.md with development workflow rules
-  - Agent & Skill usage guidelines
-  - Context management rules
-  - Development isolation modes (sandbox, worktree)
-  - Environment setup instructions
-  - Context overflow prevention mechanism
 - Database schema created via Supabase migrations
   - profiles table with RLS
   - projects table with RLS
@@ -68,13 +69,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Projects and articles grouped by date
   - Expandable project buckets with nested articles
   - Quick actions (edit, delete) on hover
-- Public feed implemented (Step 3.1)
+- Public feed implemented
   - Public layout with header and footer
   - Article card component with 3-section layout
   - Feed filters (platform, sorting)
   - Pagination with load more
   - Public articles API with filtering and sorting
-- Article detail page implemented (Step 3.2)
+- Article detail page implemented
   - Article detail API route with slug lookup
   - Article content renderer for Tiptap JSON/HTML
   - Article header with metadata and author info
@@ -83,106 +84,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Related articles from same author
   - SEO metadata with OpenGraph and Twitter cards
   - Views count increment on page visit
-- User profile pages implemented (Step 3.3)
+- User profile pages implemented
   - User profile API route with stats
   - Profile header with avatar, bio, social links
   - Profile articles list with pagination
   - SEO metadata for profiles
-
-### Changed
-- Updated API routes for Next.js 16 compatibility (params is now Promise)
-
-### Deprecated
-- Nothing yet
-
-### Removed
-- Nothing yet
-
-### Fixed
-- Nothing yet
-
----
-
-## [0.1.0] - 2026-03-13
-
-### Added
-- Initial MVP release
-- User authentication (login, register, forgot password)
-- 5-step onboarding flow
-- Project management (CRUD)
-- Article management with Tiptap editor
-- Auto-save drafts (every 30 seconds)
-- Publish with visibility options
-- Public feed with filters and sorting
-- Article detail pages with star/share
-- User profile pages
-- Dashboard with timeline
 - Loading states and error boundaries
 - Accessibility features (skip links, ARIA labels)
 - Testing infrastructure (Vitest)
 
----
-
-## Progress Tracking
-
-### Phase 1: Foundation
-| Step | Task | Status |
-|------|------|--------|
-| 1.1 | Initialize Project | Completed |
-| 1.2 | Configure Supabase Client | Completed |
-| 1.3 | Set Up Database Schema | Completed |
-| 1.4 | Build Authentication | Completed |
-| 1.5 | Build Onboarding Flow | Completed |
-
-### Phase 2: Core Features
-| Step | Task | Status |
-|------|------|--------|
-| 2.1 | Build Dashboard Layout | Completed |
-| 2.2 | Build Project Management | Completed |
-| 2.3 | Build Article Management | Completed |
-| 2.4 | Build Timeline View | Completed |
-
-### Phase 3: Public Features
-| Step | Task | Status |
-|------|------|--------|
-| 3.1 | Build Public Feed | Completed |
-| 3.2 | Build Article Detail Page | Completed |
-| 3.3 | Build User Profile Pages | Completed |
-
-### Phase 4: Polish & Deploy
-| Step | Task | Status |
-|------|------|--------|
-| 4.1 | UI Polish | Completed |
-| 4.2 | Testing | Completed |
-| 4.3 | Deployment | Completed |
+### Changed
+- Updated API routes for Next.js 16 compatibility (params is now Promise)
 
 ---
 
-## Session Log
-
-### 2026-03-13 (MVP Complete)
-- Phase 4 completed: UI Polish, Testing, Deployment
-- Added loading skeletons for all pages
-- Added error boundaries and 404 pages
-- Added accessibility improvements
-- Configured Vitest with 23 passing tests
-- Deployed to Vercel
-
-### 2026-03-13 (Earlier)
-- Created project documentation suite
-- Defined product vision: Viblog for Vibe Coders
-- Established three-level page architecture
-- Confirmed tech stack: Next.js + Tailwind + shadcn/ui + Supabase
-- Created detailed implementation plan
-
----
-
-## MVP Release v0.1.0
-
-**Release Date:** 2026-03-13
-
-All MVP features from PRD.md have been implemented and deployed.
-
----
-
-**Last Updated:** 2026-03-13
+**Last Updated:** 2026-03-14
