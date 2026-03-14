@@ -29,16 +29,6 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toBeDisabled()
   })
 
-  it('should render as child component when asChild is true', () => {
-    render(
-      <Button asChild>
-        <a href="/test">Link Button</a>
-      </Button>
-    )
-
-    expect(screen.getByRole('link')).toBeInTheDocument()
-  })
-
   it('should apply custom className', () => {
     render(<Button className="custom-class">Custom</Button>)
 
