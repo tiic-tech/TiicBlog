@@ -258,6 +258,41 @@ After context compaction/session resume:
 
 ---
 
+### Bad Case 6: External SSD Filesystem Corruption
+
+**What happened:** While implementing Phase 8 on an external SSD, files were repeatedly corrupted:
+- Files filled with null bytes (0x00)
+- Random content from other files appearing (tiptap code in unrelated test files)
+- `pnpm install` producing corrupted packages
+- Corruption persisted after multiple `rm -rf node_modules && pnpm install`
+- Even `git checkout HEAD -- <file>` didn't restore files properly
+
+**Impact:**
+- Unable to run tests
+- Unable to develop
+- Wasted significant debugging time
+
+**Root cause:** External SSD filesystem/drive corruption. First Aid reported "partition map appears to be OK" but data was still corrupted.
+
+**Resolution:**
+```
+1. Clone repository to INTERNAL drive: ~/Projects/StartUp/Viblog
+2. Run pnpm install on internal drive
+3. All tests passed immediately (148 tests)
+```
+
+**Prevention:**
+```
+1. Develop on INTERNAL drive, not external SSD
+2. External SSDs are prone to:
+   - Connection drops during writes
+   - Heat-related issues
+   - Power fluctuations
+3. If corruption occurs, clone fresh from git rather than copying folder
+```
+
+---
+
 ## Key Insights: Vibe Coding Principles
 
 ### 1. Token Monitoring is Critical

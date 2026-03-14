@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -34,27 +32,20 @@ export function Step1LLM({ onNext, onSkip }: Step1Props) {
     setError(null)
 
     try {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
+      // Use secure API route for encrypted storage
+      const response = await fetch('/api/user/api-keys', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          llmProvider: provider,
+          llmModel: model || null,
+          llmApiKey: apiKey || null,
+        }),
+      })
 
-      if (!user) {
-        setError('You must be logged in')
-        return
-      }
-
-      // Save settings to user_settings table
-      const { error: saveError } = await supabase
-        .from('user_settings')
-        .upsert({
-          user_id: user.id,
-          llm_provider: provider,
-          llm_model: model || null,
-          // Note: In production, API key should be encrypted
-          llm_api_key_encrypted: apiKey || null,
-        })
-
-      if (saveError) {
-        setError(saveError.message)
+      if (!response.ok) {
+        const data = await response.json()
+        setError(data.error || 'Failed to save')
         return
       }
 
@@ -86,7 +77,7 @@ export function Step1LLM({ onNext, onSkip }: Step1Props) {
                   onClick={() => setProvider(p.id)}
                   className={`rounded-lg border p-3 text-left text-sm transition-colors ${
                     provider === p.id
-                      ? 'border-primary bg-primary/10 text-primary'
+                      ? 'bg-primary/10 border-primary text-primary'
                       : 'border-border hover:bg-accent'
                   }`}
                 >
@@ -122,7 +113,7 @@ export function Step1LLM({ onNext, onSkip }: Step1Props) {
           </div>
 
           {error && (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-3">
+            <div className="border-destructive/50 bg-destructive/10 rounded-lg border p-3">
               <p className="text-sm text-destructive">{error}</p>
             </div>
           )}

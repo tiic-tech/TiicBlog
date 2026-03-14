@@ -9,6 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Secure API key storage with AES-256-GCM encryption (Phase 8)
+  - `src/lib/encryption.ts` - Encryption utility with encrypt/decrypt/mask functions
+  - `src/lib/api-keys.ts` - Server-side key retrieval for internal use
+  - `src/app/api/user/api-keys/route.ts` - GET/PUT/DELETE endpoints for key management
+  - `src/app/(dashboard)/dashboard/settings/page.tsx` - Settings UI for managing keys
+  - Updated onboarding steps to use encrypted storage via API
+  - Added `ENCRYPTION_KEY` to environment variables and CI workflow
 - CI/CD pipeline with GitHub Actions
   - Automated lint, type-check, build, and test on every PR
   - pnpm caching for faster CI runs

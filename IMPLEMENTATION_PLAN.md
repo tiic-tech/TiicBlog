@@ -30,44 +30,70 @@ Post-MVP Phases
 
 **Goal:** Actually store and use LLM API keys collected during onboarding
 
-**Estimated Effort:** 4-5 hours
+**Status:** Completed (2026-03-14)
 
 **Dependencies:** Phase 7 completion
 
 ---
 
 ### Step 8.1: Design Secure Storage for API Keys
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Database schema and encryption strategy
+**Deliverable:** AES-256-GCM encryption with PBKDF2 key derivation
+
+**File:** `src/lib/encryption.ts`
 
 ---
 
 ### Step 8.2: Update Onboarding to Encrypt and Store Keys
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Modified onboarding flow that stores encrypted keys
+**Deliverable:** Modified onboarding flow that stores encrypted keys via API
+
+**Files:**
+- `src/components/onboarding/step-1-llm.tsx`
+- `src/components/onboarding/step-2-database.tsx`
 
 ---
 
 ### Step 8.3: Create API Route to Retrieve Keys Securely
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Secure API endpoint for key retrieval
+**Deliverable:** Secure API endpoint for key management (GET/PUT/DELETE)
+
+**Files:**
+- `src/app/api/user/api-keys/route.ts`
+- `src/lib/api-keys.ts` (server-side key retrieval)
 
 ---
 
 ### Step 8.4: Update Settings Page to Manage Keys
-**Status:** Pending
+**Status:** Completed
 
 **Deliverable:** Settings UI for viewing/updating API keys
+
+**File:** `src/app/(dashboard)/dashboard/settings/page.tsx`
 
 ---
 
 ### Step 8.5: Add Tests for Key Management
-**Status:** Pending
+**Status:** Completed
 
-**Deliverable:** Unit and integration tests for key operations
+**Deliverable:** Unit tests for encryption utilities (7 tests passing)
+
+**File:** `src/lib/encryption.test.ts`
+
+---
+
+### Phase 8 Configuration Changes
+
+**Required Environment Variable:**
+```bash
+# Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+ENCRYPTION_KEY=<64-character-hex-string>
+```
+
+**GitHub Secrets:** Add `ENCRYPTION_KEY` to repository secrets for CI
 
 ---
 

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -31,25 +30,19 @@ export function Step2Database({ onNext, onBack }: Step2Props) {
     setError(null)
 
     try {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
+      // Use secure API route for encrypted storage
+      const response = await fetch('/api/user/api-keys', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          databaseType: dbType === 'none' ? null : dbType,
+          databaseUrl: dbUrl || null,
+        }),
+      })
 
-      if (!user) {
-        setError('You must be logged in')
-        return
-      }
-
-      // Update settings
-      const { error: saveError } = await supabase
-        .from('user_settings')
-        .update({
-          database_type: dbType === 'none' ? null : dbType,
-          database_url_encrypted: dbUrl || null,
-        })
-        .eq('user_id', user.id)
-
-      if (saveError) {
-        setError(saveError.message)
+      if (!response.ok) {
+        const data = await response.json()
+        setError(data.error || 'Failed to save')
         return
       }
 
@@ -81,7 +74,7 @@ export function Step2Database({ onNext, onBack }: Step2Props) {
                   onClick={() => setDbType(db.id)}
                   className={`rounded-lg border p-3 text-left transition-colors ${
                     dbType === db.id
-                      ? 'border-primary bg-primary/10'
+                      ? 'bg-primary/10 border-primary'
                       : 'border-border hover:bg-accent'
                   }`}
                 >
@@ -109,7 +102,7 @@ export function Step2Database({ onNext, onBack }: Step2Props) {
           )}
 
           {error && (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-3">
+            <div className="border-destructive/50 bg-destructive/10 rounded-lg border p-3">
               <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
